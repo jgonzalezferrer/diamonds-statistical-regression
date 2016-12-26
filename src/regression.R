@@ -95,8 +95,8 @@ acf2(model3$residuals)
 model4 = gls(log(price)~carat+color+clarity+institution+I(scale(carat, scale=FALSE)^2), data=df, correlation=corARMA(p=2), method="ML")
 summary(model4)
 
+# AIC comparison
 AIC(model1)
 AIC(model2)
 AIC(model3)
 AIC(model4)
-summary(model4)
