@@ -2,7 +2,7 @@
 title: "regression"
 author: "Antonio Javier González Ferrer"
 date: "26 de diciembre de 2016"
-output: pdf_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
