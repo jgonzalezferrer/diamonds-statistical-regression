@@ -50,4 +50,4 @@ df$clarity=relevel(df$clarity, ref="VS2")
 df$institution=relevel(df$institution, ref="HRD")
 ```
 
-Then, we fit the linear model using the mentioned variables. In the log-linear model, the interpretation of the estimated coefficient \(\hat{\beta}\) is that a one-unit increase in \(X\) will produce and expected increase in \(Y\) of \(e^{\hat{\beta}0}\) units. The parameters for the fitted model and the fitted line are the following:
+Then, we fit the linear model using the mentioned variables. In the log-linear model, the interpretation of the estimated coefficient ![](https://latex.codecogs.com/gif.latex?%5Chat%7B%5Cbeta%7D) is that a one-unit increase in \(X\) will produce and expected increase in \(Y\) of ![](https://latex.codecogs.com/gif.latex?e%5E%7B%5Chat%7B%5Cbeta%7D%7D) units. The parameters for the fitted model and the fitted line are the following:
