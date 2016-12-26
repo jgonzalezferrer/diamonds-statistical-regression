@@ -11,4 +11,6 @@ install.packages("gridExtra")
 install.packages("car")
 install.packages("lmtest")
 install.packages("tseries")
+install.packages("astsa")
+install.packages("nlme")
 ````
