@@ -56,7 +56,7 @@ df$clarity=relevel(df$clarity, ref="VS2")
 df$institution=relevel(df$institution, ref="HRD")
 ```
 
-Then, we fit the linear model using the mentioned variables. In the log-linear model, the interpretation of the estimated coefficient ![](https://latex.codecogs.com/gif.latex?%5Chat%7B%5Cbeta%7D) is that a one-unit increase in \(X\) will produce and expected increase in \(Y\) of ![](https://latex.codecogs.com/gif.latex?e%5E%7B%5Chat%7B%5Cbeta%7D%7D) units. The parameters for the fitted model and the fitted line are the following:
+Then, we fit the linear model using the mentioned variables. In the log-linear model, the interpretation of the estimated coefficient ![](https://latex.codecogs.com/gif.latex?%5Chat%7B%5Cbeta%7D) is that a one-unit increase in ![](https://latex.codecogs.com/gif.latex?X) will produce and expected increase in ![](https://latex.codecogs.com/gif.latex?Y) of ![](https://latex.codecogs.com/gif.latex?e%5E%7B%5Chat%7B%5Cbeta%7D%7D) units. The parameters for the fitted model and the fitted line are the following:
 
 ``` r
 # Simple linear regression model.
@@ -97,15 +97,15 @@ summary(model1)
 
 From the interpretation of the coefficients, we can discuss several aspects related to the model meaning and significance:
 
--   <b>Most influential variable: carat</b>. The carat is the most dominant variable in the price of the diamonds. An increase in 1 unit of carat implies an increase in \(e^{2.855} = 17.375\) of the mean price or, talking in diamond's dimensions, for an increase in caratage of 0.01, the mean price of a diamond increases 1.029.
+-   <b>Most influential variable: carat</b>. The carat is the most dominant variable in the price of the diamonds. An increase in 1 unit of carat implies an increase in ![](https://latex.codecogs.com/gif.latex?e%5E%7B2.855%7D%20%3D%2017.375) of the mean price or, talking in diamond's dimensions, for an increase in caratage of 0.01, the mean price of a diamond increases 1.029.
 
 -   <b>Colour and clarity ranking</b>. As expected, the better is the colour purity or the clarity, the higher will be the price. For example, colour D is the top colour purity and boosts the price of the diamonds a 50% more than the worst colour (I).
 
--   <b>Marginal tests and institution variable</b>: Each of the coefficient has a marginal test which attempts the null hypothesis \(H_0\): \(\beta_i = 0\), after adjusting the other coefficients within the model. That means, it is checked the net effect of each variable and whether should be in the model or not. All these \(p\)-values are small enough to reject \(H_0\) considering the usual significance level 0.05, except the one for institutionGIA (\(p\)-value = 0.672). We do not have evidence against the null hypothesis and hence this coefficient contributes the same as the reference category HRD to the mean price. This category could be discarded in further analysis, for instance, combining GIA and HRD into one single category. Furthermore, these two categories are the best institutions since the diamonds certificated by IGI decrease the mean price in a 16%.
+-   <b>Marginal tests and institution variable</b>: Each of the coefficient has a marginal test which attempts the null hypothesis ![](https://latex.codecogs.com/gif.latex?%24H_0%24%3A%20%24%5Cbeta_i%20%3D%200%24), after adjusting the other coefficients within the model. That means, it is checked the net effect of each variable and whether should be in the model or not. All these p-values are small enough to reject \(H_0\) considering the usual significance level 0.05, except the one for institutionGIA (p-value = 0.672). We do not have evidence against the null hypothesis and hence this coefficient contributes the same as the reference category HRD to the mean price. This category could be discarded in further analysis, for instance, combining GIA and HRD into one single category. Furthermore, these two categories are the best institutions since the diamonds certificated by IGI decrease the mean price in a 16%.
 
--   <b>Regression overall test</b>. The \(p\)-value of the overall test for the significance of the regression model is considerably small and hence this model would explain better the data than the simple mean model.
+-   <b>Regression overall test</b>. The p-value of the overall test for the significance of the regression model is considerably small and hence this model would explain better the data than the simple mean model.
 
--   <b>Multiple R-squared</b>. The Multiple R-squared measures the percentage of the variation in \(Y\) that is explained by the regression model, in this case, \(97\%\).
+-   <b>Multiple R-squared</b>. The Multiple R-squared measures the percentage of the variation in \(Y\) that is explained by the regression model, in this case, 97%.
 
 Let us perform a basic analysis of the residuals to check if the LINE conditions are fulfilled and let us try to detect which might be the factors that do not meet such conditions.
 
@@ -130,9 +130,9 @@ raintest(model1)
     ## data:  model1
     ## Rain = 0.69098, df1 = 154, df2 = 141, p-value = 0.9875
 
-A \(p\)-value near to 1 shows the linear relationship between the response and the linear predictor.
+A p-value near to 1 shows the linear relationship between the response and the linear predictor.
 
--   <b>Independence of residuals</b>: Observing the residuals vs. the fitted values, an evident parabolical pattern can be identified and hence the residuals are not independent. Performing the Durbin-Watson test checking the null hypotheses that the autocorrelation of the residuals is 0, the low p-value confirms the strong evidence to reject \(H_0\).
+-   <b>Independence of residuals</b>: Observing the residuals vs. the fitted values, an evident parabolical pattern can be identified and hence the residuals are not independent. Performing the Durbin-Watson test checking the null hypotheses that the autocorrelation of the residuals is 0, the low p-value confirms the strong evidence to reject ![](https://latex.codecogs.com/gif.latex?H_0).
 
 ``` r
 # Independence of residuals.
@@ -146,7 +146,7 @@ dwtest(model1, alternative="two.sided")
     ## DW = 0.31422, p-value < 2.2e-16
     ## alternative hypothesis: true autocorrelation is not 0
 
--   <b>Constant variance</b>: The variance does not look constant along the axis, but it is difficult to ensure it at a first glimpse. The Breusch-Pagan test against heteroskedasticity affirms this assumption (\(p\)-value \(\approx\) 0).
+-   <b>Constant variance</b>: The variance does not look constant along the axis, but it is difficult to ensure it at a first glimpse. The Breusch-Pagan test against heteroskedasticity affirms this assumption (p-value ![](https://latex.codecogs.com/gif.latex?%24%5Capprox%24) 0).
 
 ``` r
 # Constant variance.
@@ -159,7 +159,7 @@ bptest(model1)
     ## data:  model1
     ## BP = 47.223, df = 12, p-value = 4.265e-06
 
--   <b>Normality of residuals</b>: At a first glimpse, the Normal Q-Q plot seems correct and the residuals might follow a normal distribution. However, the Jarque Bera test for normality also rejects the null hypothesis but with a moderate \(p\)-value (0.01175) compared to the regular significance level of 0.05.
+-   <b>Normality of residuals</b>: At a first glimpse, the Normal Q-Q plot seems correct and the residuals might follow a normal distribution. However, the Jarque Bera test for normality also rejects the null hypothesis but with a moderate p-value (0.01175) compared to the regular significance level of 0.05.
 
 ``` r
 # Normality
@@ -184,7 +184,7 @@ We will include two different remedial actions in order to improve the validatio
 
 ### Clustering diamonds by carat
 
-The first remedial action which has been tested is to create a new categorical variable, \(carat2\), which divides diamonds in three groups depending on their caratage. This way, they can either belong to the \(small\) (\(carat < 0.5\)), \(medium\) (\(0.5 \leq carat < 1\)) or \(large\) (\(carat \geq 1\)) categories.
+The first remedial action which has been tested is to create a new categorical variable, carat2, which divides diamonds in three groups depending on their caratage. This way, they can either belong to the small (carat &lt; 0.5), medium (![](https://latex.codecogs.com/gif.latex?%240.5%20%5Cleq%20carat%20%3C%201%24)) or large (\[\]<https://latex.codecogs.com/gif.latex?%24carat%20%5Cgeq%201%24>) categories.
 
 ``` r
 # Discretizing and releveling factors.
@@ -197,7 +197,7 @@ df$carat2 <- as.factor(df$carat2)
 df$carat2=relevel(df$carat2, ref="small")
 ```
 
-A new model has been adjusted taking into account this new variable, as well as its interaction term with the already existing \(carat\). The parameters of the fitted model can be seen below:
+A new model has been adjusted taking into account this new variable, as well as its interaction term with the already existing carat. The parameters of the fitted model can be seen below:
 
 ``` r
 # Linear model with clusters.
@@ -240,9 +240,9 @@ summary(model2)
     ## Multiple R-squared:  0.9956, Adjusted R-squared:  0.9954 
     ## F-statistic:  4127 on 16 and 291 DF,  p-value: < 2.2e-16
 
-It is worth noting that, similar to what happened with the previous model, the \(p\)-values for both institutionGIA and institutionIGI are not low enough for us to have evidence to reject the null hypothesis. Therefore, the whole categorical variable could be left out in further analysis, as they do not suppose any variation in the price of the diamonds.
+It is worth noting that, similar to what happened with the previous model, the p-values for both institutionGIA and institutionIGI are not low enough for us to have evidence to reject the null hypothesis. Therefore, the whole categorical variable could be left out in further analysis, as they do not suppose any variation in the price of the diamonds.
 
-On the other hand, the overall \(p\)-value for the whole model is still low, showing that the proposed model is satisfactory. Moreover, the Multiple \(R\)-squared coefficient has slightly improved up to 99:56%. To check if the standard assumptions are met, an analysis of the residuals has been performed:
+On the other hand, the overall p-value for the whole model is still low, showing that the proposed model is satisfactory. Moreover, the Multiple R-squared coefficient has slightly improved up to 99:56%. To check if the standard assumptions are met, an analysis of the residuals has been performed:
 
 ``` r
 # Residuals
@@ -252,7 +252,7 @@ plot(model2, which=c(1:4), ask=F)
 
 <img src="notebook_files/figure-markdown_github/residuals_clusters-1.png" style="display: block; margin: auto;" />
 
--   <b>Linearity</b>: As in the previous model, the Rainbow test for linearity has been conducted. The obtained \(p\)-value, 0.94, reflects the linear relationship between the linear predictor and the response variable.
+-   <b>Linearity</b>: As in the previous model, the Rainbow test for linearity has been conducted. The obtained p-value, 0.94, reflects the linear relationship between the linear predictor and the response variable.
 
 ``` r
 # Rainbow test
@@ -265,7 +265,7 @@ raintest(model2)
     ## data:  model2
     ## Rain = 0.7763, df1 = 154, df2 = 137, p-value = 0.9366
 
--   <b>Independence of residuals</b>: The residuals vs. fitted values plot has considerably improved and is now closer to being flat. However, performing the Durbin-Watson test reveals that there is strong evidence to reject \(H_0\), so the conclusion is that residuals are not independent.
+-   <b>Independence of residuals</b>: The residuals vs. fitted values plot has considerably improved and is now closer to being flat. However, performing the Durbin-Watson test reveals that there is strong evidence to reject ![](https://latex.codecogs.com/gif.latex?H_0), so the conclusion is that residuals are not independent.
 
 ``` r
 # Independence of residuals.
@@ -279,7 +279,7 @@ dwtest(model2, alternative="two.sided")
     ## DW = 1.0398, p-value < 2.2e-16
     ## alternative hypothesis: true autocorrelation is not 0
 
--   <b>Constant variance</b>: The Breusch-Pagan test has been conducted to check heteroskedasticity, and the resulting \(p\)-value, very close to 0, confirms that the variance of these residuals is also not constant.
+-   <b>Constant variance</b>: The Breusch-Pagan test has been conducted to check heteroskedasticity, and the resulting p-value, very close to 0, confirms that the variance of these residuals is also not constant.
 
 ``` r
 # Constant variance.
@@ -292,7 +292,7 @@ bptest(model2)
     ## data:  model2
     ## BP = 60.618, df = 16, p-value = 4.117e-07
 
--   <b>Normality of residuals</b>: Judging by the Normal Q-Q plot, residuals seem to be normally distributed. To confirm this hypothesis, the Jarque Bera test has been conducted. The test returns a high \(p\)-value, showing that residuals are indeed normal. This condition is now met, in contrast to the first model.
+-   <b>Normality of residuals</b>: Judging by the Normal Q-Q plot, residuals seem to be normally distributed. To confirm this hypothesis, the Jarque Bera test has been conducted. The test returns a high p-value, showing that residuals are indeed normal. This condition is now met, in contrast to the first model.
 
 ``` r
 # Normality.
@@ -308,11 +308,11 @@ jarque.bera.test(df$resid)
 
 #### Interpreting the interaction parameter (clusters.)
 
-At first sight, the interaction parameter seems confusing, given that both \(carat*carat2medium\) (-1.76) and \(carat*carat2large\) (-3.26) are negative. We would expect that the higher is the carat, the higher is its price. However, there is a clear interpretation for this fact: the variation in diamond price when \(carat\) is increased or decreased by one unit is different for each of the clusters. A small variation in caratage results in a much higher variation in price for diamonds belonging to the \(small\) cluster, while it does not make such a big difference for heavier diamonds, especially those which belong to the \(large\) cluster. Putting it in numbers, the difference of price increment between carats of 0.30 and 0.35 is much higher than carats of 1 and 1.05.
+At first sight, the interaction parameter seems confusing, given that both carat\*carat2medium (-1.76) and carat\*carat2large (-3.26) are negative. We would expect that the higher is the carat, the higher is its price. However, there is a clear interpretation for this fact: the variation in diamond price when carat is increased or decreased by one unit is different for each of the clusters. A small variation in caratage results in a much higher variation in price for diamonds belonging to the small cluster, while it does not make such a big difference for heavier diamonds, especially those which belong to the large cluster. Putting it in numbers, the difference of price increment between carats of 0.30 and 0.35 is much higher than carats of 1 and 1.05.
 
 ### Square of carat
 
-A second approach to remedial actions has been to include the square of \(carat\) as a new explanatory variable, which avoids the subjectivity of clusters definition. The new fitted model has the following parameters:
+A second approach to remedial actions has been to include the square of carat as a new explanatory variable, which avoids the subjectivity of clusters definition. The new fitted model has the following parameters:
 
 ``` r
 # Linear model with centered square of carat.
