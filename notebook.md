@@ -101,13 +101,13 @@ From the interpretation of the coefficients, we can discuss several aspects rela
 
 -   <b>Colour and clarity ranking</b>. As expected, the better is the colour purity or the clarity, the higher will be the price. For example, colour D is the top colour purity and boosts the price of the diamonds a 50% more than the worst colour (I).
 
--   <b>Marginal tests and institution variable</b>: Each of the coefficient has a marginal test which attempts the null hypothesis ![](https://latex.codecogs.com/gif.latex?%24H_0%24%3A%20%24%5Cbeta_i%20%3D%200%24), after adjusting the other coefficients within the model. That means, it is checked the net effect of each variable and whether should be in the model or not. All these p-values are small enough to reject \(H_0\) considering the usual significance level 0.05, except the one for institutionGIA (p-value = 0.672). We do not have evidence against the null hypothesis and hence this coefficient contributes the same as the reference category HRD to the mean price. This category could be discarded in further analysis, for instance, combining GIA and HRD into one single category. Furthermore, these two categories are the best institutions since the diamonds certificated by IGI decrease the mean price in a 16%.
+-   <b>Marginal tests and institution variable</b>: Each of the coefficient has a marginal test which attempts the null hypothesis ![](https://latex.codecogs.com/gif.latex?%24H_0%24%3A%20%24%5Cbeta_i%20%3D%200%24), after adjusting the other coefficients within the model. That means, it is checked the net effect of each variable and whether should be in the model or not. All these p-values are small enough to reject ![](https://latex.codecogs.com/gif.latex?H_0) considering the usual significance level 0.05, except the one for institutionGIA (p-value = 0.672). We do not have evidence against the null hypothesis and hence this coefficient contributes the same as the reference category HRD to the mean price. This category could be discarded in further analysis, for instance, combining GIA and HRD into one single category. Furthermore, these two categories are the best institutions since the diamonds certificated by IGI decrease the mean price in a 16%.
 
 -   <b>Regression overall test</b>. The p-value of the overall test for the significance of the regression model is considerably small and hence this model would explain better the data than the simple mean model.
 
--   <b>Multiple R-squared</b>. The Multiple R-squared measures the percentage of the variation in \(Y\) that is explained by the regression model, in this case, 97%.
+-   <b>Multiple R-squared</b>. The Multiple R-squared measures the percentage of the variation in Y that is explained by the regression model, in this case, 97%.
 
-Let us perform a basic analysis of the residuals to check if the LINE conditions are fulfilled and let us try to detect which might be the factors that do not meet such conditions.
+Let us perform a basic analysis of the residuals to check if the LINE conditions are fulfilled and let us try to detect which might be the factors that do not meet such conditions:
 
 ``` r
 # Residuals
@@ -354,11 +354,11 @@ summary(model3)
 
 It is advisable to center when you include powers of the same variable to avoid multicollinearity.
 
-In comparison to the previous models, the intercept, as well as the coefficients corresponding to colour, clarity and institution remain almost the same, while the coefficient related to caratage has slightly increased. The newly included term, the square of \(carat\), has a negative coefficient of -2.1. However, as \(carat\) is distributed across the sample in the range of 0.18 to 1.1, the influence of this term will mostly be noticeable for diamonds in the upper end of the carat scale. This means, as we had deducted from the previous model, that for an equal increase in \(carat\), smaller diamonds will generally see a higher increase in price than bigger gems. Moreover, the \(p\)-value for the overall test is still very low and the Multiple R-squared (0.9949) is slightly worse than the previous model but still larger than the simple one.
+In comparison to the previous models, the intercept, as well as the coefficients corresponding to colour, clarity and institution remain almost the same, while the coefficient related to caratage has slightly increased. The newly included term, the square of carat, has a negative coefficient of -2.1. However, as carat is distributed across the sample in the range of 0.18 to 1.1, the influence of this term will mostly be noticeable for diamonds in the upper end of the carat scale. This means, as we had deducted from the previous model, that for an equal increase in carat, smaller diamonds will generally see a higher increase in price than bigger gems. Moreover, the p-value for the overall test is still very low and the Multiple R-squared (0.9949) is slightly worse than the previous model but still larger than the simple one.
 
 The next step is to perform an residuals' analysis to check if the assumptions of the model are met. The linearity and the normality of the residuals are fulfilled, let us check what happens with the independence of residuals and the constant variance:
 
--   <b>Independence of residuals</b>: Performing the Durbin-Watson test on independence of residuals reveals, once again, that residuals are not independent, as there is strong evidence to reject \(H_0\).
+-   <b>Independence of residuals</b>: Performing the Durbin-Watson test on independence of residuals reveals, once again, that residuals are not independent, as there is strong evidence to reject ![](https://latex.codecogs.com/gif.latex?H_0).
 
 ``` r
 # Independence of residuals.
@@ -372,7 +372,7 @@ dwtest(model3, alternative="two.sided")
     ## DW = 0.98039, p-value < 2.2e-16
     ## alternative hypothesis: true autocorrelation is not 0
 
--   <b>Constant variance</b> Here, this model improves in relation to the preceding ones: the Breusch-Pagan returns a \(p\)-value of 0.24, which leads to considering the residuals as homoscedastic.
+-   <b>Constant variance</b> Here, this model improves in relation to the preceding ones: the Breusch-Pagan returns a p-value of 0.24, which leads to considering the residuals as homoscedastic.
 
 ``` r
 # Constant variance.
@@ -397,7 +397,7 @@ In conclusion, with help from expert knowledge, the clustering model seems to be
 Generalized Least Square
 ------------------------
 
-We have fitted so far three regression models for the diamonds dataset. Let's start with Model 3, which includes \(carat^2\) as an explanatory variable and shows non independent residuals. Let's plot the ACF and PACF of its residuals. The ACF shows an exponential but quick decay and the PACF shows the first two spikes significantly different from 0. This is typical of an AR(2) process.
+We have fitted so far three regression models for the diamonds dataset. Let's start with Model 3, which includes carat^2 as an explanatory variable and shows non independent residuals. Let's plot the ACF and PACF of its residuals. The ACF shows an exponential but quick decay and the PACF shows the first two spikes significantly different from 0. This is typical of an AR(2) process.
 
 ``` r
 # Considering the model as a time series.
@@ -444,7 +444,7 @@ acf2(model3$residuals)
 
 The Generalized Least Squares method fits a linear model by relaxing the assumption of homoskedasticity, while all other assumptions remain to hold. That is the case of model 3b, where we have added a square term which improves the constant variance but still remains the correlation of the residuals.
 
-We have fitted a linear model using the R function \(gls()\) from the library \(nlme\). The model was fitted by maximizing the log-likelihood and we have added an autoregressive process of order 2 for the residuals, as suggested by the ACF and PACF functions above:
+We have fitted a linear model using the R function <i>gls()</i> from the library <i>nlme</i>. The model was fitted by maximizing the log-likelihood and we have added an autoregressive process of order 2 for the residuals, as suggested by the ACF and PACF functions above:
 
 ``` r
 library("nlme")
