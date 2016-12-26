@@ -12,11 +12,13 @@ library(gridExtra)
 library(car)
 library(lmtest)
 library(tseries)
+library(astsa)
+library(nlme)
 ```
 
 ``` r
 # Loading the dataset into a DataFrame.
-df <- read.table("data/HW-diamonds.txt", quote="\"", comment.char="")
+df <- read.table("../data/HW-diamonds.txt", quote="\"", comment.char="")
 colnames(df) <- c("carat", "color", "clarity", "institution", "price")
 
 observations = nrow(df)
@@ -401,12 +403,6 @@ We have fitted so far three regression models for the diamonds dataset. Let's st
 
 ``` r
 # Considering the model as a time series.
-library("astsa")
-```
-
-    ## Warning: package 'astsa' was built under R version 3.3.2
-
-``` r
 acf2(model3$residuals)
 ```
 
@@ -447,8 +443,6 @@ The Generalized Least Squares method fits a linear model by relaxing the assumpt
 We have fitted a linear model using the R function <i>gls()</i> from the library <i>nlme</i>. The model was fitted by maximizing the log-likelihood and we have added an autoregressive process of order 2 for the residuals, as suggested by the ACF and PACF functions above:
 
 ``` r
-library("nlme")
-
 # Generalized least square model.
 model4 = gls(log(price)~carat+color+clarity+institution+I(scale(carat, scale=FALSE)^2), data=df, correlation=corARMA(p=2), method="ML")
 summary(model4)
