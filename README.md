@@ -17,7 +17,8 @@ install.packages("nlme")
 
 Statistical Learning models
 ----------- 
+We have applied different versions of statistical learning models, checking the LINE assumptions for each of them:
 
-* [Linear Regression](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html): the function <i>lm</i> is used to fit linear models. We will include other two different interaction terms: a) clusters of diamonds, b) square of the carat.
+* [Linear Regression](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html): the function <i>lm()</i> is used to fit linear models. We will include other two different interaction terms to the initial linear model: a) clusters of diamonds, b) square of the carat.
 
-* [Generalized Least Square](https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/gls.html): the function <i>gls</i> fits a linear model using generalized least squares. The errors are allowed to be correlated.
+* [Generalized Least Square](https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/gls.html): the function <i>gls()</i> fits a linear model using generalized least squares. The errors are allowed to be correlated.
