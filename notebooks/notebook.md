@@ -186,7 +186,7 @@ We will include two different remedial actions in order to improve the validatio
 
 ### Clustering diamonds by carat
 
-The first remedial action which has been tested is to create a new categorical variable, carat2, which divides diamonds in three groups depending on their caratage. This way, they can either belong to the small (carat &lt; 0.5), medium (![](https://latex.codecogs.com/gif.latex?%240.5%20%5Cleq%20carat%20%3C%201%24)) or large (\[\]<https://latex.codecogs.com/gif.latex?%24carat%20%5Cgeq%201%24>) categories.
+The first remedial action which has been tested is to create a new categorical variable, `carat2`, which divides diamonds in three groups depending on their caratage. This way, they can either belong to the small (carat &lt; 0.5), medium (![](https://latex.codecogs.com/gif.latex?%240.5%20%5Cleq%20carat%20%3C%201%24)) or large (![](https://latex.codecogs.com/gif.latex?%24carat%20%5Cgeq%201%24)) categories.
 
 ``` r
 # Discretizing and releveling factors.
@@ -194,8 +194,8 @@ df$carat2 <- df$carat
 df$carat2[df$carat < 0.5] <- "small"
 df$carat2[df$carat >= 0.5 & df$carat < 1] <- "medium"
 df$carat2[df$carat >= 1] <- "large"
-df$carat2 <- as.factor(df$carat2)
 
+df$carat2 = as.factor(df$carat2)
 df$carat2=relevel(df$carat2, ref="small")
 ```
 
@@ -402,7 +402,6 @@ Generalized Least Square
 We have fitted so far three regression models for the diamonds dataset. Let's start with Model 3, which includes carat^2 as an explanatory variable and shows non independent residuals. Let's plot the ACF and PACF of its residuals. The ACF shows an exponential but quick decay and the PACF shows the first two spikes significantly different from 0. This is typical of an AR(2) process.
 
 ``` r
-# Considering the model as a time series.
 acf2(model3$residuals)
 ```
 
